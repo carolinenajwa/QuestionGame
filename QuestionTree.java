@@ -40,6 +40,8 @@ public class QuestionTree {
 
     // Plays one complete game of "20 questions"
     public void play() {
+
+        //use recursion to update the final game
         root = play(root);
     }
 
@@ -57,6 +59,7 @@ public class QuestionTree {
 
     // Stores current tree to output file represented by "PrintStream".
     public void save(PrintStream output) {
+        //recursive solution for saving lines
         if () {
            
         } else if (){
