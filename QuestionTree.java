@@ -1,6 +1,6 @@
 // Caroline El Jazmi
 // Gavin Stuart
-// (Date)
+// 6/1/2021
 
 // CS 145
 // Lab 6 - 20 Questions
@@ -16,7 +16,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Question Tree {
+public class QuestionTree {
 
     private QuestionNode root;
     private Scanner console;
@@ -24,18 +24,20 @@ public class Question Tree {
     
     // This constructor initializes question tree, passing an object 
     // representing user interface for input/output.
-    // Initialy the tree contains a single leaf noderepresenting the object "computer".
-    public QuestionTree(Userinterface ui) {
-        this.ui = ui;
-        root = newQuestionNode("computer");
-        console = new Scanner(System.in);
+    // Initially the tree contains a single leaf node representing the object "computer".
+    public QuestionTree(UserInterface ui) {
         
+        this.ui = ui;
+        root = new QuestionNode("computer");
+        console = new Scanner(System.in);
+    }
+
     // Plays one complete game of "20 questions"
     public void play() {
         root = play(root);
     }
 
-    // Private method uses currect tree to play one complete
+    // Private method uses correct tree to play one complete
     // game, if user's guess does not exist in list, tree is expanded 
     // to include new object(guess).
     private QuestionNode play(QuestionNode current) {
