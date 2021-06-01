@@ -10,18 +10,17 @@
 
 public class QuestionNode {
 
-  public QuestionNode yes;
-  public QuestionNode no;
-  public String data;
-  
-  public QuestionNode(String data) {
-      this(null, null, data);
-  }
-  
-  public QuestionNode(QuestionNode yes, QuestionNode no, String data){
-      this.yes = yes;
-      this.no = no;
-      this.data = data;
-   }
-   
-   
+    public QuestionNode yes;
+    public QuestionNode no;
+    public String data;
+
+    public QuestionNode(String data) {
+        this(null, null, data);
+    }
+
+    public QuestionNode(QuestionNode yes, QuestionNode no, String data) {
+        this.yes = yes;
+        this.no = no;
+        this.data = data;
+    }
+}

@@ -5,7 +5,6 @@
 // CS 145
 // Lab 6 - 20 Questions
 
-
 // This class produces a guessing game called "20 Questions"
 // which implements a binary tree system. The game asks the user 
 // yes/no questions until the the game guesses right. If the guess
@@ -19,17 +18,24 @@ import java.io.*;
 public class QuestionTree {
 
     private QuestionNode root;
-    private Scanner console;
     private UserInterface ui;
-    
-    // This constructor initializes question tree, passing an object 
+    private int games;
+    private int gamesWon;
+
+    // This constructor initializes question tree, passing an object
     // representing user interface for input/output.
-    // Initially the tree contains a single leaf node representing the object "computer".
+    // Initially the tree contains a single leaf node representing the object
+    // "computer".
     public QuestionTree(UserInterface ui) {
-        
+
+        //store the ui object
         this.ui = ui;
+
+        //create a new question node
         root = new QuestionNode("computer");
-        console = new Scanner(System.in);
+
+        //no need for console?
+        //console = new Scanner(System.in);
     }
 
     // Plays one complete game of "20 questions"
@@ -38,27 +44,38 @@ public class QuestionTree {
     }
 
     // Private method uses correct tree to play one complete
-    // game, if user's guess does not exist in list, tree is expanded 
+    // game, if user's guess does not exist in list, tree is expanded
     // to include new object(guess).
     private QuestionNode play(QuestionNode current) {
-   
+        // increment the games counter
+        this.games++;
+
+        // use this.ui for user interface
+
+        return current;
     }
-    
+
     // Stores current tree to output file represented by "PrintStream".
     public void save(PrintStream output) {
-    
+        if () {
+           
+        } else if (){
+               
+        }
     }
-    
+
+
+    // Reads data in from a text file
     public void load(Scanner Input) {
-    
+
     }
-    
+
     public int totalGames() {
-    
+        return this.games;
     }
-    
+
     public int gamesWon() {
-    
+        return this.gamesWon;
     }
-    
+
 }
