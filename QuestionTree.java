@@ -101,8 +101,8 @@ public class QuestionTree {
         
         output.println("Q: ");
         output.print(root.data);
-        buildTree yes = new TreeNode();
-        buildTree no = new TreeNode();
+        buildTree yes = new QuestionNode();
+        buildTree no = new QuestionNode();
         current.yes = yes;
         current.no = no;
         buildTree(yes, ouput);
