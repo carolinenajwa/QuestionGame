@@ -60,10 +60,12 @@ public class QuestionTree {
     // Stores current tree to output file represented by "PrintStream".
     public void save(PrintStream output) {
         //recursive solution for saving lines
-        if () {
-           
-        } else if (){
+        if (output == null) {
+            System.out.println("Error");  
+        } else {
+            buildTree(current, output);
                
+        }
         }
     }
 
