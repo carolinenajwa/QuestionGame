@@ -67,11 +67,20 @@ public class QuestionTree {
         }
     }
 
-
-    // Reads data in from a text file
-    public void load(Scanner Input) {
-
-    }
+ // we load data from our file in a Tree instance
+  public void inputReader(Scanner input) {
+      String data = input.nextLine();
+      QuestionNode current = new QuestionNode(data);
+      buildTree(current, output);
+  }
+      
+  // Constructs a current tree file based on user input
+  public void load(Scanner input) {
+      while(input.hasNextLine()) {
+         current = inputReader(input)
+      }
+  }
+  
 
     public int totalGames() {
         return this.games;
@@ -80,5 +89,26 @@ public class QuestionTree {
     public int gamesWon() {
         return this.gamesWon;
     }
+    
+  // Private method that stores user-input into a current input file
+  private void buildTree(QuestionNode root, PrintStream output) throws IllegalException {
+   
+    if (current == root) {
+     output.println("A: ");
+     output.print(root.data);
+
+    } else {
+        
+        output.println("Q: ");
+        output.print(root.data);
+        buildTree yes = new TreeNode();
+        buildTree no = new TreeNode();
+        current.yes = yes;
+        current.no = no;
+        buildTree(yes, ouput);
+        buildTree(no, output);
+      }
+    }
+  }
 
 }
