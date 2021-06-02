@@ -43,8 +43,6 @@ public class QuestionTree {
     public void play() {
         // print the message out in data
 
-        ui.println("Would your item happen to be a " + this.root.data);
-
         // use recursion to update the final game
         root = play(root);
     }
@@ -53,43 +51,64 @@ public class QuestionTree {
     // game, if user's guess does not exist in list, tree is expanded
     // to include new object(guess).
     private QuestionNode play(QuestionNode currentNode) {
+        
+
+        // evaluate the game
+        if (this.games == 0) {
+            ui.println("Would your item happen to be a " + this.root.data);
+        }else{
+            ui.println(currentNode.data);
+        }
+
         // increment the games counter
         this.games++;
-
-        // use recursion to check the next value
+        //we have a true declairation - do this
         if (ui.nextBoolean()) {
-            ui.print("I win!");
 
-        } else {
-
-            // if it is the end of the tree, create a new entry
-            if (currentNode.no == null && currentNode.yes == null) {
-
-                // computer lost
-                ui.println("I lose.  What is your object?");
-                String userObject = ui.nextLine();
-
-                ui.println("Type a yes/no question to distinguish your object from a " + currentNode.data);
-                String userQuestion = ui.nextLine();
-                ui.println("And what is the answer for your object?");
-                boolean userAnswer = ui.nextBoolean();
-
-                QuestionNode newNode = new QuestionNode(null, currentNode, userQuestion);
-
-                if (userAnswer) {
-                    // assign to
-                    currentNode = newNode;
-                    currentNode.yes = new QuestionNode(userObject);
-                } else {
-
-                }
-
-            } else {
+            //check if we have a winner
+            if (currentNode.yes == null) {
+                ui.println("Would your item happen to be a " + currentNode.yes.data);
+            }else {
+                ui.println("Would your item happen to be a " + currentNode.yes.data);
+            }
+            
+            //operate on the boolean
+            if (ui.nextBoolean()) {
+                ui.println("I won!");
+                this.gamesWon++;
+            }else {
                 play(currentNode.no);
             }
+            
+        } else
+        // if it is the end of the tree, create a new entry
+        if (currentNode.no == null && currentNode.yes == null) {
+
+            // computer lost
+            ui.println("I lose.  What is your object?");
+            String userObject = ui.nextLine();
+            ui.println("Type a yes/no question to distinguish your object from a " + currentNode.data);
+            String userQuestion = ui.nextLine();
+            ui.println("And what is the answer for your object?");
+            boolean userAnswer = ui.nextBoolean();
+
+            // if this is true for the question 
+            if (userAnswer) {
+                currentNode = new QuestionNode(null, currentNode, userQuestion);
+                currentNode.yes = new QuestionNode(userObject);
+
+            // if this is false for the question
+            } else {
+                currentNode = new QuestionNode(currentNode, null, userQuestion);
+                currentNode.no = new QuestionNode(userObject);
+            }
+
+        } else {
+            play(currentNode.no);
         }
 
         return currentNode;
+
     }
 
     // Stores current tree to output file represented by "PrintStream".
@@ -114,7 +133,6 @@ public class QuestionTree {
             // buildTree(no, output);
         }
     }
-
 
     // we load data from our file in a Tree instance
     public void inputReader(String inputString) {
