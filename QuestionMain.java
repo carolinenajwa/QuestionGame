@@ -73,6 +73,7 @@ public class QuestionMain implements UserInterface {
             // play one complete game
             println();      // blank line between games
             tree.play();
+            
             print(PLAY_AGAIN_MESSAGE);
         } while (nextBoolean());   // prompt to play again
         

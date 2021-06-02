@@ -13,6 +13,7 @@
 // games.
 
 import java.util.*;
+
 import java.io.*;
 
 public class QuestionTree {
@@ -28,61 +29,124 @@ public class QuestionTree {
     // "computer".
     public QuestionTree(UserInterface ui) {
 
-        //store the ui object
+        // store the ui object
         this.ui = ui;
 
-        //create a new question node
+        // create a new question node
         root = new QuestionNode("computer");
 
-        //no need for console?
-        //console = new Scanner(System.in);
+        // no need for console?
+        // console = new Scanner(System.in);
     }
 
     // Plays one complete game of "20 questions"
     public void play() {
+        // print the message out in data
 
-        //use recursion to update the final game
+        ui.println("Would your item happen to be a " + this.root.data);
+
+        // use recursion to update the final game
         root = play(root);
     }
 
     // Private method uses correct tree to play one complete
     // game, if user's guess does not exist in list, tree is expanded
     // to include new object(guess).
-    private QuestionNode play(QuestionNode current) {
+    private QuestionNode play(QuestionNode currentNode) {
         // increment the games counter
         this.games++;
 
-        // use this.ui for user interface
+        // use recursion to check the next value
+        if (ui.nextBoolean()) {
+            ui.print("I win!");
 
-        return current;
+        } else {
+
+            // if it is the end of the tree, create a new entry
+            if (currentNode.no == null && currentNode.yes == null) {
+
+                // computer lost
+                ui.println("I lose.  What is your object?");
+                String userObject = ui.nextLine();
+
+                ui.println("Type a yes/no question to distinguish your object from a " + currentNode.data);
+                String userQuestion = ui.nextLine();
+                ui.println("And what is the answer for your object?");
+                boolean userAnswer = ui.nextBoolean();
+
+                QuestionNode newNode = new QuestionNode(null, currentNode, userQuestion);
+
+                if (userAnswer) {
+                    // assign to
+                    currentNode = newNode;
+                    currentNode.yes = new QuestionNode(userObject);
+                } else {
+
+                }
+
+            } else {
+                play(currentNode.no);
+            }
+        }
+
+        return currentNode;
     }
 
     // Stores current tree to output file represented by "PrintStream".
     public void save(PrintStream output) {
-        //recursive solution for saving lines
+        // recursive solution for saving lines
         if (output == null) {
-            System.out.println("Error");  
+            System.out.println("Error");
         } else {
-            buildTree(current, output);
-               
-        }
+            // if (current == root) {
+            output.println("A: ");
+            output.print(root.data);
+
+            // } else {
+
+            output.println("Q: ");
+            output.print(root.data);
+            // buildTree yes = new QuestionNode();
+            // buildTree no = new QuestionNode();
+            // root.yes = yes;
+            // root.no = no;
+            // buildTree(yes, output);
+            // buildTree(no, output);
         }
     }
 
- // we load data from our file in a Tree instance
-  public void inputReader(Scanner input) {
-      String data = input.nextLine();
-      QuestionNode current = new QuestionNode(data);
-      buildTree(current, output);
-  }
-      
-  // Constructs a current tree file based on user input
-  public void load(Scanner input) {
-      while(input.hasNextLine()) {
-         current = inputReader(input)
-      }
-  }
-  
+
+    // we load data from our file in a Tree instance
+    public void inputReader(String inputString) {
+
+        QuestionNode current = new QuestionNode(inputString);
+
+    }
+
+    // Constructs a current tree file based on user input
+    public void load(Scanner scannerInput) {
+        // set the root to null
+        this.root.data = null;
+        // while there is another line
+        String data;
+        Scanner count = scannerInput;
+        while (count.hasNext()) {
+
+        }
+
+        // load data
+        while (scannerInput.hasNextLine()) {
+            QuestionNode newQ;
+            data = scannerInput.nextLine();
+            if (this.root.data == null) {
+                newQ = new QuestionNode(data);
+            } else {
+                if (data.substring(0, 1) == "A") {
+
+                }
+            }
+        }
+    }
 
     public int totalGames() {
         return this.games;
@@ -91,26 +155,5 @@ public class QuestionTree {
     public int gamesWon() {
         return this.gamesWon;
     }
-    
-  // Private method that stores user-input into a current input file
-  private void buildTree(QuestionNode root, PrintStream output) throws IllegalException {
-   
-    if (current == root) {
-     output.println("A: ");
-     output.print(root.data);
-
-    } else {
-        
-        output.println("Q: ");
-        output.print(root.data);
-        buildTree yes = new QuestionNode();
-        buildTree no = new QuestionNode();
-        current.yes = yes;
-        current.no = no;
-        buildTree(yes, ouput);
-        buildTree(no, output);
-      }
-    }
-  }
 
 }
